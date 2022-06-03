@@ -33,6 +33,7 @@ public class LoginHandler  extends Thread{
                 line = bufferedReader.readLine();
 
                 if(line != null && line.contains("GET") && line.contains("loginform.do")){
+                    System.out.println("line = " + line);
                     String screenName = line.split(" ")[1]
                             .replace("/", "")
                             .replace(".do" ,"");
