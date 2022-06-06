@@ -19,10 +19,12 @@ public class WebServer {
 
     public static void main(String[] args) throws Exception {
         runServer(args, (connection) -> {
+            LoginHandler loginHandler = new LoginHandler(connection);
+            loginHandler.start();
 //            IndexHTMLHandler indexHTMLHandler = new IndexHTMLHandler(connection);
+//            indexHTMLHandler.start();
             LoginSuccessHtml loginSuccessHtml = new LoginSuccessHtml(connection);
             loginSuccessHtml.start();
-//            indexHTMLHandler.start();
         });
     }
 

@@ -1,5 +1,6 @@
 package bong.lines.basic.handler.loginsucceshtml;
 
+import bong.lines.basic.comm.LoginDto;
 import bong.lines.basic.handler.getindexhtml.IndexHTMLHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,13 +40,19 @@ public class LoginSuccessHtml extends Thread {
 
                 if(line != null && line.contains("GET") && line.contains("user/create")){
                     System.out.println("line = " + line);
-                    String screenName = line.split(" ")[1]
+                    String address = line.split(" ")[1]
                             .replace("/", "")
-                            .replace(".do" ,"");
-//                    body = Objects.requireNonNull(
-//                                    IndexHTMLHandler.class
-//                                            .getResourceAsStream("/templates/user/" + screenName + ".html"))
-//                            .readAllBytes();
+                            .replace("user" ,"");
+                    String screenName = address.split("\\?")[0];
+                    String[] login = address.split("\\?")[1].split("&");
+
+                    LoginDto loginDto = new LoginDto(login[0].split("=")[1],login[1].split("=")[1],login[2].split("=")[1],login[3].split("=")[1]);
+                    System.out.println("loginDto.toString() = " + loginDto.toString());
+
+                    body = Objects.requireNonNull(
+                                    LoginSuccessHtml.class
+                                            .getResourceAsStream("/templates/user/" + screenName + ".html"))
+                            .readAllBytes();
                 }
             } while (body == null);
 
