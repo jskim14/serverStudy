@@ -1,6 +1,7 @@
 package com.jskim;
 
 import com.jskim.comm.WebHandlerInf;
+import com.jskim.handler.common.DispatcherServlet;
 import com.jskim.handler.getloginhtml.LoginHandler;
 import com.jskim.handler.loginsucceshtml.LoginSuccessHtml;
 import org.slf4j.Logger;
@@ -17,12 +18,14 @@ public class WebServer {
 
     public static void main(String[] args) throws Exception {
         runServer(args, (connection) -> {
-            LoginHandler loginHandler = new LoginHandler(connection);
-            loginHandler.start();
+//            LoginHandler loginHandler = new LoginHandler(connection);
+//            loginHandler.start();
 //            IndexHTMLHandler indexHTMLHandler = new IndexHTMLHandler(connection);
 //            indexHTMLHandler.start();
-            LoginSuccessHtml loginSuccessHtml = new LoginSuccessHtml(connection);
-            loginSuccessHtml.start();
+//            LoginSuccessHtml loginSuccessHtml = new LoginSuccessHtml(connection);
+//            loginSuccessHtml.start();
+            DispatcherServlet dispatcherServlet = new DispatcherServlet(connection);
+            dispatcherServlet.run();
         });
     }
 
